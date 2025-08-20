@@ -108,59 +108,8 @@ export default function ShopPage() {
     return shuffled.slice(0, 4)
   }
 
-  const avatarItems = [
-    {
-      id: 1,
-      name: "Corona Dorada",
-      description: "Muestra tu estatus real",
-      icon: Crown,
-      cost: 100,
-      rarity: "legendary"
-    },
-    {
-      id: 2,
-      name: "Camisa de Entrenamiento",
-      description: "Para los atletas serios",
-      icon: Shirt,
-      cost: 50,
-      rarity: "rare"
-    },
-    {
-      id: 3,
-      name: "Tema Neón",
-      description: "Colores vibrantes para tu perfil",
-      icon: Palette,
-      cost: 75,
-      rarity: "epic"
-    }
-  ]
-
-  const powerUps = [
-    {
-      id: 1,
-      name: "Congelador de Racha (Tarea)",
-      description: "Protege tu racha de una tarea específica",
-      icon: Timer,
-      cost: 20,
-      type: "streak_freeze_task"
-    },
-    {
-      id: 2,
-      name: "Congelador de Racha (Día)",
-      description: "Protege todas tus rachas por un día",
-      icon: Shield,
-      cost: 35,
-      type: "streak_freeze_day"
-    },
-    {
-      id: 3,
-      name: "Boost de XP",
-      description: "Duplica tu XP por 24 horas",
-      icon: Zap,
-      cost: 40,
-      type: "xp_boost"
-    }
-  ]
+  const avatarItems = getDailyShopItems()
+  const powerUps = getDailyPowerUps()
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
