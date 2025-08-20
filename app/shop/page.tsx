@@ -105,7 +105,13 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <ProtectedRoute>
+      <SidebarLayout
+        breadcrumbs={[
+          { label: "Tienda" }
+        ]}
+      >
+        <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Tienda</h1>
@@ -256,6 +262,8 @@ export default function ShopPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+        </div>
+      </SidebarLayout>
+    </ProtectedRoute>
   )
 }
