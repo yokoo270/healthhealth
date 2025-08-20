@@ -270,11 +270,14 @@ export default function ShopPage() {
             <div>
               <p className="text-lg font-semibold">+10 Gemas</p>
               <p className="text-sm text-muted-foreground">
-                Próxima recompensa en 2h 15m
+                {canClaimDailyReward() ? "¡Disponible ahora!" : "Ya reclamado hoy"}
               </p>
             </div>
-            <Button disabled>
-              Reclamado
+            <Button
+              onClick={claimDailyReward}
+              disabled={!canClaimDailyReward()}
+            >
+              {canClaimDailyReward() ? "Reclamar" : "Reclamado"}
             </Button>
           </div>
         </CardContent>
