@@ -53,7 +53,7 @@ export function AnalyticsContent() {
         {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
           <Card className="border-secondary/20">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center space-x-2 mb-2">
                 <Flame className="w-4 h-4 text-secondary" />
                 <span className="text-sm font-medium">Calories</span>
@@ -64,7 +64,7 @@ export function AnalyticsContent() {
           </Card>
 
           <Card className="border-secondary/20">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center space-x-2 mb-2">
                 <Target className="w-4 h-4 text-secondary" />
                 <span className="text-sm font-medium">Goals</span>
