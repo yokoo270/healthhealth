@@ -30,19 +30,82 @@ export default function ShopPage() {
 
   const gems = user?.gems || 0
 
+  useEffect(() => {
+    const stored = localStorage.getItem('lastDailyReward')
+    setLastDailyReward(stored)
+  }, [])
+
+  const canClaimDailyReward = () => {
+    if (!lastDailyReward) return true
+    const last = new Date(lastDailyReward)
+    const now = new Date()
+    const hoursDiff = (now.getTime() - last.getTime()) / (1000 * 60 * 60)
+    return hoursDiff >= 24
+  }
+
+  const claimDailyReward = () => {
+    if (canClaimDailyReward()) {
+      const newGems = (user?.gems || 0) + 10
+      updateUser({ gems: newGems })
+      const now = new Date().toISOString()
+      localStorage.setItem('lastDailyReward', now)
+      setLastDailyReward(now)
+    }
+  }
+
   const handleWatchAd = () => {
     setWatchingAd(true)
     // Simulate ad watching
     setTimeout(() => {
-      setGems(prev => prev + 5)
+      const newGems = (user?.gems || 0) + 5
+      updateUser({ gems: newGems })
       setWatchingAd(false)
     }, 3000)
   }
 
   const purchaseItem = (cost: number) => {
     if (gems >= cost) {
-      setGems(prev => prev - cost)
+      const newGems = gems - cost
+      updateUser({ gems: newGems })
     }
+  }
+
+  // Generate daily shop items based on date
+  const getDailyShopItems = () => {
+    const today = new Date().toDateString()
+    const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0)
+
+    const allItems = [
+      { name: "Corona Dorada", description: "Muestra tu estatus real", icon: Crown, cost: 100, rarity: "legendary" },
+      { name: "Camisa de Entrenamiento", description: "Para los atletas serios", icon: Shirt, cost: 50, rarity: "rare" },
+      { name: "Tema Neón", description: "Colores vibrantes", icon: Palette, cost: 75, rarity: "epic" },
+      { name: "Halo Celestial", description: "Brilla con luz divina", icon: Star, cost: 150, rarity: "legendary" },
+      { name: "Camiseta Vintage", description: "Estilo retro", icon: Shirt, cost: 30, rarity: "common" },
+      { name: "Tema Oscuro", description: "Para los nocturnos", icon: Palette, cost: 60, rarity: "rare" },
+      { name: "Corona de Diamante", description: "El máximo lujo", icon: Crown, cost: 200, rarity: "legendary" },
+      { name: "Uniforme Espacial", description: "Para explorar galaxias", icon: Shirt, cost: 90, rarity: "epic" }
+    ]
+
+    // Select 3 random items based on date seed
+    const shuffled = allItems.sort(() => (seed % 2) - 0.5)
+    return shuffled.slice(0, 3)
+  }
+
+  const getDailyPowerUps = () => {
+    const today = new Date().toDateString()
+    const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0) + 100
+
+    const allPowerUps = [
+      { name: "Congelador de Racha (Tarea)", description: "Protege tu racha específica", icon: Timer, cost: 20, type: "streak_freeze_task" },
+      { name: "Congelador de Racha (Día)", description: "Protege todas tus rachas", icon: Shield, cost: 35, type: "streak_freeze_day" },
+      { name: "Boost de XP", description: "Duplica tu XP por 24h", icon: Zap, cost: 40, type: "xp_boost" },
+      { name: "Multiplicador de Gemas", description: "x2 gemas por 12h", icon: Gem, cost: 45, type: "gem_multiplier" },
+      { name: "Protección Total", description: "Inmunidad por 48h", icon: Shield, cost: 80, type: "total_protection" },
+      { name: "Mega Boost XP", description: "x3 XP por 8h", icon: Zap, cost: 70, type: "mega_xp_boost" }
+    ]
+
+    const shuffled = allPowerUps.sort(() => (seed % 2) - 0.5)
+    return shuffled.slice(0, 4)
   }
 
   const avatarItems = [
