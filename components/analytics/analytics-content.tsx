@@ -2,8 +2,15 @@
 
 import { useState } from "react"
 import { AnalyticsHeader } from "@/analytics/analytics-header"
+import { ProgressChart } from "@/analytics/progress-chart"
+import { WorkoutHeatmap } from "@/analytics/workout-heatmap"
+import { PerformanceMetrics } from "@/analytics/performance-metrics"
+import { NutritionChart } from "@/analytics/nutrition-chart"
 import { useAuth } from "@/auth/auth-provider"
 import { Activity, Target, Flame, Heart, Dumbbell, Clock, Award } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function AnalyticsContent() {
   const [selectedPeriod, setSelectedPeriod] = useState("7d")
