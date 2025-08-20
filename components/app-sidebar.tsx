@@ -108,14 +108,14 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center space-x-3 mt-1">
-                <div className="flex items-center space-x-1">
-                  <Heart className="h-3 w-3 text-red-500" />
-                  <span className="text-xs font-medium">5</span>
+              <div className="flex items-center space-x-2 mt-0.5">
+                <div className="flex items-center space-x-0.5">
+                  <Heart className="h-2.5 w-2.5 text-red-500" />
+                  <span className="text-[10px] font-medium">5</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <Flame className="h-3 w-3 text-orange-500" />
-                  <span className="text-xs font-medium">12</span>
+                <div className="flex items-center space-x-0.5">
+                  <Flame className="h-2.5 w-2.5 text-orange-500" />
+                  <span className="text-[10px] font-medium">12</span>
                 </div>
               </div>
             </div>
