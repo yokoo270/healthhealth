@@ -87,7 +87,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
-        <div className="p-2 border-b space-y-2">
+        <div className="p-4 border-b space-y-3">
           <div className="flex items-center gap-2">
             <Link href="/profile" className="relative">
               <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all">
