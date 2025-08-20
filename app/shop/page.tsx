@@ -20,10 +20,15 @@ import {
 import { UserStatsDisplay } from "@/components/gamification/user-stats"
 import { ProtectedRoute } from "@/auth/protected-route"
 import { SidebarLayout } from "@/components/sidebar-layout"
+import { useAuth } from "@/auth/auth-provider"
+import { useEffect } from "react"
 
 export default function ShopPage() {
-  const [gems, setGems] = useState(45)
+  const { user, updateUser } = useAuth()
   const [watchingAd, setWatchingAd] = useState(false)
+  const [lastDailyReward, setLastDailyReward] = useState<string | null>(null)
+
+  const gems = user?.gems || 0
 
   const handleWatchAd = () => {
     setWatchingAd(true)
