@@ -141,7 +141,23 @@ const PLAN_CONFIGS: Record<SubscriptionPlan, PlanLimits> = {
     hasAdvancedAnalytics: true,
     hasCustomization: false,
   },
+  basic: {
+    aiMessagesPerDay: 50,
+    workoutGenerationsPerMonth: 10,
+    nutritionPlansPerMonth: 5,
+    hasUnlimitedLives: false,
+    hasAdvancedAnalytics: true,
+    hasCustomization: false,
+  },
   premium: {
+    aiMessagesPerDay: -1, // unlimited
+    workoutGenerationsPerMonth: -1, // unlimited
+    nutritionPlansPerMonth: -1, // unlimited
+    hasUnlimitedLives: true,
+    hasAdvancedAnalytics: true,
+    hasCustomization: true,
+  },
+  pro: {
     aiMessagesPerDay: -1, // unlimited
     workoutGenerationsPerMonth: -1, // unlimited
     nutritionPlansPerMonth: -1, // unlimited

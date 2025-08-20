@@ -14,6 +14,7 @@ import {
 import { ExportProvider } from "@/components/data-export/global-export-provider"
 import { LegalDisclaimerModal } from "@/components/legal/legal-disclaimer-modal"
 import { usePathname } from "next/navigation"
+import * as React from "react"
 
 interface SidebarLayoutProps {
   children: React.ReactNode

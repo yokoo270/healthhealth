@@ -27,9 +27,9 @@ interface ExportProviderProps {
 
 export function ExportProvider({ children }: ExportProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { user, subscription } = useAuth()
+  const { user } = useAuth()
 
-  const isPremium = subscription?.type === "premium"
+  const isPremium = user?.subscription?.plan === "premium" || user?.subscription?.plan === "pro"
 
   const exportOptions = [
     {

@@ -20,6 +20,11 @@ import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/auth/auth-provider"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  currentPath?: string
+}
+
 import {
   Home,
   Route,
@@ -75,7 +80,7 @@ const items = [
   },
 ]
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
   const { user } = useAuth()
   const pathname = usePathname()
 
