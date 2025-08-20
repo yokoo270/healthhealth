@@ -111,11 +111,11 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
               <div className="flex items-center space-x-2 mt-0.5">
                 <div className="flex items-center space-x-0.5">
                   <Heart className="h-2.5 w-2.5 text-red-500" />
-                  <span className="text-[10px] font-medium">5</span>
+                  <span className="text-[10px] font-medium">{user?.currentStreak || 0}</span>
                 </div>
                 <div className="flex items-center space-x-0.5">
-                  <Flame className="h-2.5 w-2.5 text-orange-500" />
-                  <span className="text-[10px] font-medium">12</span>
+                  <Gem className="h-2.5 w-2.5 text-blue-500" />
+                  <span className="text-[10px] font-medium">{user?.gems || 0}</span>
                 </div>
               </div>
             </div>
@@ -127,24 +127,20 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
             <div className="space-y-0.5">
               <div className="flex justify-between text-[10px]">
                 <span>XP</span>
-                <span>150/1000</span>
+                <span>{user?.xp || 0}/1000</span>
               </div>
-              <Progress value={15} className="h-1" />
+              <Progress value={((user?.xp || 0) / 1000) * 100} className="h-1" />
             </div>
 
             {/* Stats Row */}
             <div className="flex justify-between text-[10px]">
               <div className="flex items-center gap-0.5">
                 <Heart className="w-2.5 h-2.5 text-red-500 fill-red-500" />
-                <span>3</span>
-              </div>
-              <div className="flex items-center gap-0.5">
-                <Flame className="w-2.5 h-2.5 text-orange-500" />
-                <span>7</span>
+                <span>{user?.currentStreak || 0}</span>
               </div>
               <div className="flex items-center gap-0.5">
                 <Gem className="w-2.5 h-2.5 text-blue-500" />
-                <span>45</span>
+                <span>{user?.gems || 0}</span>
               </div>
             </div>
           </div>
