@@ -1,4 +1,3 @@
-
 "use client"
 
 import { ProtectedRoute } from "@/auth/protected-route"
@@ -18,13 +17,13 @@ import {
   Smile, 
   Users,
   Timer,
-  Meditation,
+  Circle,
   Cigarette,
   BookOpen,
   Moon,
   Activity,
   Target,
-  MessageHeart,
+  MessageCircle,
   Handshake,
   Zap,
   Shield,
