@@ -228,6 +228,9 @@ export default function ShopPage() {
         </TabsContent>
 
         <TabsContent value="powerups" className="space-y-4">
+          <div className="text-center mb-4 p-2 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">⚡ Power-ups cambian diariamente</p>
+          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {powerUps.map((item) => (
               <Card key={item.id} className="glow-card border-orange-500/20">
