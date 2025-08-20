@@ -175,7 +175,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
       </SidebarContent>
 
       <SidebarFooter>
-        <div className="p-1.5">
+        <div className="p-3">
           <div className="text-[10px] text-muted-foreground text-center">
             HealthMaxxing v1.0
           </div>
