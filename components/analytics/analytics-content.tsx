@@ -30,10 +30,10 @@ export function AnalyticsContent() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Period Selector */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-3xl font-serif font-black mb-2">📊 Health Analytics</h1>
-            <p className="text-muted-foreground">Track your progress and optimize your performance</p>
+            <h1 className="text-2xl font-serif font-black mb-1">📊 Health Analytics</h1>
+            <p className="text-sm text-muted-foreground">Track your progress and optimize your performance</p>
           </div>
           <div className="flex space-x-2">
             {["7d", "30d", "90d", "1y"].map((period) => (
