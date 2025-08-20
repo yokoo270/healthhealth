@@ -88,7 +88,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <div className="p-2 border-b space-y-2">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link href="/profile" className="relative">
               <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all">
                 <AvatarImage src={user?.profileImage} alt={user?.name || "Profile"} />
