@@ -163,7 +163,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
                     className="w-full"
                   >
                     <Link href={item.url} className="flex items-center">
-                      <item.icon className="mr-2 h-4 w-4" />
+                      <item.icon className="mr-1.5 h-3.5 w-3.5" />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -175,8 +175,8 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
       </SidebarContent>
 
       <SidebarFooter>
-        <div className="p-2">
-          <div className="text-xs text-muted-foreground text-center">
+        <div className="p-1.5">
+          <div className="text-[10px] text-muted-foreground text-center">
             HealthMaxxing v1.0
           </div>
         </div>
