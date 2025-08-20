@@ -191,6 +191,9 @@ export default function ShopPage() {
         </TabsList>
 
         <TabsContent value="avatar" className="space-y-4">
+          <div className="text-center mb-4 p-2 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">🔄 Objetos rotan cada 24 horas</p>
+          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {avatarItems.map((item) => (
               <Card key={item.id} className={`glow-card ${getRarityColor(item.rarity)}`}>
