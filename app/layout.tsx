@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Open_Sans, Montserrat } from "next/font/google"
-import { AuthProvider } from "@/components/auth/auth-provider"
+import { AuthProvider } from "@/auth/auth-provider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import "./globals.css"
@@ -44,6 +44,9 @@ html {
       <body className={`${openSans.variable} ${montserrat.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange={false}>
           <LanguageProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

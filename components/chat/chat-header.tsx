@@ -1,5 +1,5 @@
 "use client"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Bot, Zap, History, Plus } from "lucide-react"

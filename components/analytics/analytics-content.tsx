@@ -1,6 +1,6 @@
 @@ .. @@
 import { AnalyticsHeader } from "./analytics-header"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/auth/auth-provider"
 import { Activity, Target, Flame, Heart, Dumbbell, Clock, Award } from "lucide-react"
 
 export function AnalyticsContent() {

@@ -2,6 +2,8 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import type React from "react"
 
+export type SubscriptionPlan = "free" | "basic" | "premium" | "pro"
+
 interface WorkoutEntry {
   id: string
   date: string
@@ -45,7 +47,7 @@ interface DailyStats {
 }
 
 interface Subscription {
-  plan: "free" | "premium"
+  plan: SubscriptionPlan
   status: "active" | "cancelled" | "expired"
   startDate: string
   endDate?: string
@@ -122,7 +124,7 @@ interface User {
   gamification?: Gamification
 }
 
-const PLAN_CONFIGS: Record<"free" | "premium", PlanLimits> = {
+const PLAN_CONFIGS: Record<SubscriptionPlan, PlanLimits> = {
   free: {
     aiMessagesPerDay: 10,
     workoutGenerationsPerMonth: 3,
@@ -131,7 +133,23 @@ const PLAN_CONFIGS: Record<"free" | "premium", PlanLimits> = {
     hasAdvancedAnalytics: false,
     hasCustomization: false,
   },
+  basic: {
+    aiMessagesPerDay: 50,
+    workoutGenerationsPerMonth: 10,
+    nutritionPlansPerMonth: 5,
+    hasUnlimitedLives: false,
+    hasAdvancedAnalytics: true,
+    hasCustomization: false,
+  },
   premium: {
+    aiMessagesPerDay: -1, // unlimited
+    workoutGenerationsPerMonth: -1, // unlimited
+    nutritionPlansPerMonth: -1, // unlimited
+    hasUnlimitedLives: true,
+    hasAdvancedAnalytics: true,
+    hasCustomization: true,
+  },
+  pro: {
     aiMessagesPerDay: -1, // unlimited
     workoutGenerationsPerMonth: -1, // unlimited
     nutritionPlansPerMonth: -1, // unlimited
@@ -156,7 +174,7 @@ interface AuthContextType {
   updateDailyStats: (date: string, stats: Partial<DailyStats>) => void
   getTodayStats: () => DailyStats | null
   getWeekStats: () => { workouts: number; calories: number; goalsAchieved: number }
-  upgradePlan: (plan: "free" | "premium") => Promise<boolean>
+  upgradePlan: (plan: SubscriptionPlan) => Promise<boolean>
   canUseFeature: (feature: keyof PlanLimits) => boolean
   getRemainingUsage: () => { aiMessages: number; workoutGenerations: number; nutritionPlans: number }
   incrementUsage: (type: "aiMessage" | "workoutGeneration" | "nutritionPlan") => void
@@ -446,7 +464,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const upgradePlan = async (plan: "free" | "premium"): Promise<boolean> => {
+  upgradePlan: async (plan: SubscriptionPlan): Promise<boolean> => {
     if (!user) return false
     
     try {

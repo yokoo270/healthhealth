@@ -1,5 +1,5 @@
 "use client"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/auth/auth-provider"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"

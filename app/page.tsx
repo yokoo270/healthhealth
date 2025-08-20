@@ -1,6 +1,6 @@
 
 "use client"
-import { useAuth } from "@/components/auth/auth-provider"
+import { useAuth } from "@/auth/auth-provider"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { HeroSection } from "@/components/sections/hero-section"

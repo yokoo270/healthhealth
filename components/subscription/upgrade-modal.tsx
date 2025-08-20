@@ -2,7 +2,7 @@
 import { useState } from "react"
 import type React from "react"
 
-import { useAuth, type SubscriptionPlan } from "@/components/auth/auth-provider"
+import { useAuth, type SubscriptionPlan } from "@/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
