@@ -163,7 +163,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
                     className="w-full"
                   >
                     <Link href={item.url} className="flex items-center">
-                      <item.icon className="mr-1.5 h-3.5 w-3.5" />
+                      <item.icon className="mr-2 h-4 w-4" />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
