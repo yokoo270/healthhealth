@@ -122,28 +122,28 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
           </div>
 
           {/* Gamification Stats */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {/* XP Progress */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-xs">
+            <div className="space-y-0.5">
+              <div className="flex justify-between text-[10px]">
                 <span>XP</span>
                 <span>150/1000</span>
               </div>
-              <Progress value={15} className="h-1.5" />
+              <Progress value={15} className="h-1" />
             </div>
 
             {/* Stats Row */}
-            <div className="flex justify-between text-xs">
-              <div className="flex items-center gap-1">
-                <Heart className="w-3 h-3 text-red-500 fill-red-500" />
+            <div className="flex justify-between text-[10px]">
+              <div className="flex items-center gap-0.5">
+                <Heart className="w-2.5 h-2.5 text-red-500 fill-red-500" />
                 <span>3</span>
               </div>
-              <div className="flex items-center gap-1">
-                <Flame className="w-3 h-3 text-orange-500" />
+              <div className="flex items-center gap-0.5">
+                <Flame className="w-2.5 h-2.5 text-orange-500" />
                 <span>7</span>
               </div>
-              <div className="flex items-center gap-1">
-                <Gem className="w-3 h-3 text-blue-500" />
+              <div className="flex items-center gap-0.5">
+                <Gem className="w-2.5 h-2.5 text-blue-500" />
                 <span>45</span>
               </div>
             </div>
