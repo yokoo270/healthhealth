@@ -85,7 +85,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
   const pathname = usePathname()
 
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="floating" {...props}>
       <SidebarHeader>
         <div className="p-2 border-b space-y-2">
           <div className="flex items-center gap-2">
