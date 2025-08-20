@@ -90,7 +90,7 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
         <div className="p-2 border-b space-y-2">
           <div className="flex items-center gap-2">
             <Link href="/profile" className="relative">
-              <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all">
+              <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all">
                 <AvatarImage src={user?.profileImage} alt={user?.name || "Profile"} />
                 <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white font-semibold">
                   {user?.name?.charAt(0)?.toUpperCase() || "U"}
@@ -98,13 +98,13 @@ export function AppSidebar({ currentPath, ...props }: AppSidebarProps) {
               </Avatar>
             </Link>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center space-x-2">
-                <h3 className="font-semibold text-sm truncate">
+              <div className="flex items-center space-x-1">
+                <h3 className="font-semibold text-xs truncate">
                   {user?.name || "Usuario"}
                 </h3>
                 <Link href="/settings">
-                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0 hover:bg-primary/10">
-                    <Settings className="h-3 w-3" />
+                  <Button variant="ghost" size="sm" className="h-5 w-5 p-0 hover:bg-primary/10">
+                    <Settings className="h-2.5 w-2.5" />
                   </Button>
                 </Link>
               </div>
