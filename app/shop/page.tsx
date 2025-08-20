@@ -1,4 +1,3 @@
-
 "use client"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -6,19 +5,21 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
-import { 
-  Gem, 
-  Play, 
-  Crown, 
-  Shirt, 
-  Palette, 
-  Star, 
+import {
+  Gem,
+  Play,
+  Crown,
+  Shirt,
+  Palette,
+  Star,
   Gift,
   Timer,
   Shield,
   Zap
 } from "lucide-react"
 import { UserStatsDisplay } from "@/components/gamification/user-stats"
+import { ProtectedRoute } from "@/auth/protected-route"
+import { SidebarLayout } from "@/components/sidebar-layout"
 
 export default function ShopPage() {
   const [gems, setGems] = useState(45)
