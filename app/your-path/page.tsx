@@ -1,4 +1,3 @@
-
 "use client"
 
 import { ProtectedRoute } from "@/auth/protected-route"
@@ -18,13 +17,13 @@ import {
   Smile, 
   Users,
   Timer,
-  Meditation,
+  Circle,
   Cigarette,
   BookOpen,
   Moon,
   Activity,
   Target,
-  MessageHeart,
+  MessageCircle,
   Handshake,
   Zap,
   Shield,
@@ -191,7 +190,7 @@ export default function YourPathPage() {
                 <Card className="glow-card border-purple-500/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Meditation className="w-5 h-5 text-purple-500" />
+                      <Circle className="w-5 h-5 text-purple-500" />
                       Meditación y Relajación
                     </CardTitle>
                     <CardDescription>
@@ -389,7 +388,7 @@ export default function YourPathPage() {
                   <Card className="glow-card border-teal-500/20">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <MessageHeart className="w-5 h-5 text-teal-500" />
+                        <MessageCircle className="w-5 h-5 text-teal-500" />
                         Expresión Emocional Saludable
                       </CardTitle>
                       <CardDescription>
@@ -486,7 +485,7 @@ export default function YourPathPage() {
                   <Card className="glow-card border-rose-500/20">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <MessageHeart className="w-5 h-5 text-rose-500" />
+                        <MessageCircle className="w-5 h-5 text-rose-500" />
                         Relaciones Románticas
                       </CardTitle>
                       <CardDescription>
@@ -569,7 +568,7 @@ export default function YourPathPage() {
                 </div>
                 <Link href="/chat">
                   <Button className="glow-primary">
-                    <MessageHeart className="w-4 h-4 mr-2" />
+                    <MessageCircle className="w-4 h-4 mr-2" />
                     Hablar con IA
                   </Button>
                 </Link>

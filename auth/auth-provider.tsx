@@ -110,6 +110,8 @@ interface User {
   joinDate?: string
   currentStreak?: number
   longestStreak?: number
+  gems?: number
+  xp?: number
   subscription?: Subscription
   usageStats?: UsageStats
 }

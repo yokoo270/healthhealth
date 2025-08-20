@@ -1,4 +1,3 @@
-
 "use client"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -6,92 +5,111 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
-import { 
-  Gem, 
-  Play, 
-  Crown, 
-  Shirt, 
-  Palette, 
-  Star, 
+import {
+  Gem,
+  Play,
+  Crown,
+  Shirt,
+  Palette,
+  Star,
   Gift,
   Timer,
   Shield,
   Zap
 } from "lucide-react"
 import { UserStatsDisplay } from "@/components/gamification/user-stats"
+import { ProtectedRoute } from "@/auth/protected-route"
+import { SidebarLayout } from "@/components/sidebar-layout"
+import { useAuth } from "@/auth/auth-provider"
+import { useEffect } from "react"
 
 export default function ShopPage() {
-  const [gems, setGems] = useState(45)
+  const { user, updateUser } = useAuth()
   const [watchingAd, setWatchingAd] = useState(false)
+  const [lastDailyReward, setLastDailyReward] = useState<string | null>(null)
+
+  const gems = user?.gems || 0
+
+  useEffect(() => {
+    const stored = localStorage.getItem('lastDailyReward')
+    setLastDailyReward(stored)
+  }, [])
+
+  const canClaimDailyReward = () => {
+    if (!lastDailyReward) return true
+    const last = new Date(lastDailyReward)
+    const now = new Date()
+    const hoursDiff = (now.getTime() - last.getTime()) / (1000 * 60 * 60)
+    return hoursDiff >= 24
+  }
+
+  const claimDailyReward = () => {
+    if (canClaimDailyReward()) {
+      const newGems = (user?.gems || 0) + 10
+      updateUser({ gems: newGems })
+      const now = new Date().toISOString()
+      localStorage.setItem('lastDailyReward', now)
+      setLastDailyReward(now)
+    }
+  }
 
   const handleWatchAd = () => {
     setWatchingAd(true)
     // Simulate ad watching
     setTimeout(() => {
-      setGems(prev => prev + 5)
+      const newGems = (user?.gems || 0) + 5
+      updateUser({ gems: newGems })
       setWatchingAd(false)
     }, 3000)
   }
 
   const purchaseItem = (cost: number) => {
     if (gems >= cost) {
-      setGems(prev => prev - cost)
+      const newGems = gems - cost
+      updateUser({ gems: newGems })
     }
   }
 
-  const avatarItems = [
-    {
-      id: 1,
-      name: "Corona Dorada",
-      description: "Muestra tu estatus real",
-      icon: Crown,
-      cost: 100,
-      rarity: "legendary"
-    },
-    {
-      id: 2,
-      name: "Camisa de Entrenamiento",
-      description: "Para los atletas serios",
-      icon: Shirt,
-      cost: 50,
-      rarity: "rare"
-    },
-    {
-      id: 3,
-      name: "Tema Neón",
-      description: "Colores vibrantes para tu perfil",
-      icon: Palette,
-      cost: 75,
-      rarity: "epic"
-    }
-  ]
+  // Generate daily shop items based on date
+  const getDailyShopItems = () => {
+    const today = new Date().toDateString()
+    const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0)
 
-  const powerUps = [
-    {
-      id: 1,
-      name: "Congelador de Racha (Tarea)",
-      description: "Protege tu racha de una tarea específica",
-      icon: Timer,
-      cost: 20,
-      type: "streak_freeze_task"
-    },
-    {
-      id: 2,
-      name: "Congelador de Racha (Día)",
-      description: "Protege todas tus rachas por un día",
-      icon: Shield,
-      cost: 35,
-      type: "streak_freeze_day"
-    },
-    {
-      id: 3,
-      name: "Boost de XP",
-      description: "Duplica tu XP por 24 horas",
-      icon: Zap,
-      cost: 40,
-      type: "xp_boost"
-    }
-  ]
+    const allItems = [
+      { name: "Corona Dorada", description: "Muestra tu estatus real", icon: Crown, cost: 100, rarity: "legendary" },
+      { name: "Camisa de Entrenamiento", description: "Para los atletas serios", icon: Shirt, cost: 50, rarity: "rare" },
+      { name: "Tema Neón", description: "Colores vibrantes", icon: Palette, cost: 75, rarity: "epic" },
+      { name: "Halo Celestial", description: "Brilla con luz divina", icon: Star, cost: 150, rarity: "legendary" },
+      { name: "Camiseta Vintage", description: "Estilo retro", icon: Shirt, cost: 30, rarity: "common" },
+      { name: "Tema Oscuro", description: "Para los nocturnos", icon: Palette, cost: 60, rarity: "rare" },
+      { name: "Corona de Diamante", description: "El máximo lujo", icon: Crown, cost: 200, rarity: "legendary" },
+      { name: "Uniforme Espacial", description: "Para explorar galaxias", icon: Shirt, cost: 90, rarity: "epic" }
+    ]
+
+    // Select 3 random items based on date seed
+    const shuffled = allItems.sort(() => (seed % 2) - 0.5)
+    return shuffled.slice(0, 3)
+  }
+
+  const getDailyPowerUps = () => {
+    const today = new Date().toDateString()
+    const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0) + 100
+
+    const allPowerUps = [
+      { name: "Congelador de Racha (Tarea)", description: "Protege tu racha específica", icon: Timer, cost: 20, type: "streak_freeze_task" },
+      { name: "Congelador de Racha (Día)", description: "Protege todas tus rachas", icon: Shield, cost: 35, type: "streak_freeze_day" },
+      { name: "Boost de XP", description: "Duplica tu XP por 24h", icon: Zap, cost: 40, type: "xp_boost" },
+      { name: "Multiplicador de Gemas", description: "x2 gemas por 12h", icon: Gem, cost: 45, type: "gem_multiplier" },
+      { name: "Protección Total", description: "Inmunidad por 48h", icon: Shield, cost: 80, type: "total_protection" },
+      { name: "Mega Boost XP", description: "x3 XP por 8h", icon: Zap, cost: 70, type: "mega_xp_boost" }
+    ]
+
+    const shuffled = allPowerUps.sort(() => (seed % 2) - 0.5)
+    return shuffled.slice(0, 4)
+  }
+
+  const avatarItems = getDailyShopItems()
+  const powerUps = getDailyPowerUps()
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
@@ -104,7 +122,13 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <ProtectedRoute>
+      <SidebarLayout
+        breadcrumbs={[
+          { label: "Tienda" }
+        ]}
+      >
+        <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Tienda</h1>
@@ -167,6 +191,9 @@ export default function ShopPage() {
         </TabsList>
 
         <TabsContent value="avatar" className="space-y-4">
+          <div className="text-center mb-4 p-2 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">🔄 Objetos rotan cada 24 horas</p>
+          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {avatarItems.map((item) => (
               <Card key={item.id} className={`glow-card ${getRarityColor(item.rarity)}`}>
@@ -201,6 +228,9 @@ export default function ShopPage() {
         </TabsContent>
 
         <TabsContent value="powerups" className="space-y-4">
+          <div className="text-center mb-4 p-2 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">⚡ Power-ups cambian diariamente</p>
+          </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {powerUps.map((item) => (
               <Card key={item.id} className="glow-card border-orange-500/20">
@@ -246,15 +276,20 @@ export default function ShopPage() {
             <div>
               <p className="text-lg font-semibold">+10 Gemas</p>
               <p className="text-sm text-muted-foreground">
-                Próxima recompensa en 2h 15m
+                {canClaimDailyReward() ? "¡Disponible ahora!" : "Ya reclamado hoy"}
               </p>
             </div>
-            <Button disabled>
-              Reclamado
+            <Button
+              onClick={claimDailyReward}
+              disabled={!canClaimDailyReward()}
+            >
+              {canClaimDailyReward() ? "Reclamar" : "Reclamado"}
             </Button>
           </div>
         </CardContent>
       </Card>
-    </div>
+        </div>
+      </SidebarLayout>
+    </ProtectedRoute>
   )
 }

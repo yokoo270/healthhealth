@@ -1,7 +1,16 @@
-@@ .. @@
-import { AnalyticsHeader } from "./analytics-header"
+"use client"
+
+import { useState } from "react"
+import { AnalyticsHeader } from "@/analytics/analytics-header"
+import { ProgressChart } from "@/analytics/progress-chart"
+import { WorkoutHeatmap } from "@/analytics/workout-heatmap"
+import { PerformanceMetrics } from "@/analytics/performance-metrics"
+import { NutritionChart } from "@/analytics/nutrition-chart"
 import { useAuth } from "@/auth/auth-provider"
 import { Activity, Target, Flame, Heart, Dumbbell, Clock, Award } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function AnalyticsContent() {
   const [selectedPeriod, setSelectedPeriod] = useState("7d")
@@ -21,10 +30,10 @@ export function AnalyticsContent() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Period Selector */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-3xl font-serif font-black mb-2">📊 Health Analytics</h1>
-            <p className="text-muted-foreground">Track your progress and optimize your performance</p>
+            <h1 className="text-2xl font-serif font-black mb-1">📊 Health Analytics</h1>
+            <p className="text-sm text-muted-foreground">Track your progress and optimize your performance</p>
           </div>
           <div className="flex space-x-2">
             {["7d", "30d", "90d", "1y"].map((period) => (
@@ -42,20 +51,9 @@ export function AnalyticsContent() {
         </div>
 
         {/* Key Metrics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="border-primary/20">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <Activity className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium">Workouts</span>
-              </div>
-              <div className="text-2xl font-bold">{totalWorkouts}</div>
-              <div className="text-xs text-muted-foreground">{totalWorkouts === 0 ? "Start logging workouts" : "Total workouts"}</div>
-            </CardContent>
-          </Card>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
           <Card className="border-secondary/20">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center space-x-2 mb-2">
                 <Flame className="w-4 h-4 text-secondary" />
                 <span className="text-sm font-medium">Calories</span>
@@ -65,47 +63,14 @@ export function AnalyticsContent() {
             </CardContent>
           </Card>
 
-          <Card className="border-accent/20">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <Clock className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium">Duration</span>
-              </div>
-              <div className="text-2xl font-bold">{totalDuration > 60 ? `${Math.round(totalDuration/60)}h` : `${totalDuration}m`}</div>
-              <div className="text-xs text-muted-foreground">{totalDuration === 0 ? "No workout time yet" : "Total workout time"}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-primary/20">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <Heart className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium">Avg HR</span>
-              </div>
-              <div className="text-2xl font-bold">{avgHeartRate}</div>
-              <div className="text-xs text-muted-foreground">{avgHeartRate === 0 ? "No HR data" : "bpm"}</div>
-            </CardContent>
-          </Card>
-
           <Card className="border-secondary/20">
-            <CardContent className="p-4">
+            <CardContent className="p-3">
               <div className="flex items-center space-x-2 mb-2">
                 <Target className="w-4 h-4 text-secondary" />
                 <span className="text-sm font-medium">Goals</span>
               </div>
               <div className="text-2xl font-bold">{goalsCompletion}%</div>
               <div className="text-xs text-muted-foreground">{goalsCompletion === 0 ? "Set your first goal" : "Goals completed"}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-red-500/20">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <Flame className="w-4 h-4 text-red-500" />
-                <span className="text-sm font-medium">Streak</span>
-              </div>
-              <div className="text-2xl font-bold text-red-500">{currentStreak}</div>
-              <div className="text-xs text-muted-foreground">{currentStreak === 0 ? "Start your streak" : "days"}</div>
             </CardContent>
           </Card>
         </div>
