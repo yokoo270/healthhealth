@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { AnalyticsHeader } from "./analytics-header"
+import { AnalyticsHeader } from "@/analytics/analytics-header"
 import { useAuth } from "@/auth/auth-provider"
 import { Activity, Target, Flame, Heart, Dumbbell, Clock, Award } from "lucide-react"
 
